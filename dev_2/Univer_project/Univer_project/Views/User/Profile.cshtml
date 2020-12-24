@@ -1,0 +1,40 @@
+﻿@model Univer_project.Models.User
+@{
+    ViewData["Title"] = "Профиль";
+    Layout = "~/Views/Shared/_LayoutForLogged.cshtml";
+}
+<style>
+    body {
+        background: #ffffff;
+    }
+</style>
+<link rel="stylesheet" href="~/css/profile.css" />
+<div class="profile-header-img">
+    <img src=@Model.GetAvatarName()>
+    <form method="post" asp-controller="User" asp-action="ChangeProfilePhoto" enctype="multipart/form-data">
+        <input style="margin-left: 2.5rem; width:400px" type="file" name="photo" multiple="" class="form-control">
+        <button class="btn btn-primary" style="margin-left: 10px;" type="submit">Поменять</button>
+    </form>
+</div>
+
+<form asp-controller="User" asp-action="ChangeEmail" method="post" style="margin-top: 60px">
+    <h5 style="margin-bottom: 15px">
+        Текущий адрес электронной почты:
+        @if (Model.Email != null)
+        {
+            @Model.Email
+        }
+        else
+        {
+            <text>Не установлен</text>
+        }
+    </h5>
+    <div class="input-group" style="width:400px; float: left;">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Изменить Адрес</span>
+        </div>
+        <input type="text" class="form-control" name="email">
+    </div>
+    <button class="btn btn-primary" style="margin-left: 10px;" type="submit">OK</button>
+</form>
+

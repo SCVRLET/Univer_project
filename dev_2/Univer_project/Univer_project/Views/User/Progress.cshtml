@@ -1,0 +1,53 @@
+@model IEnumerable<Mark>
+@{
+    ViewData["Title"] = "Main";
+    Layout = "~/Views/Shared/_LayoutForLogged.cshtml";
+}
+<style>
+    body {
+        background: #ffffff;
+    }
+</style>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Семестр
+            </th>
+            <th>
+                Предмет
+            </th>
+            <th>
+                Баллы за семестр
+            </th>
+            <th>
+                Тип тестирования
+            </th>
+            <th>
+                Дата тестирования
+            </th>
+            <th>
+                Баллы за тестирование
+            </th>
+            <th>
+                Всего баллов
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+            @foreach (var i in Model)
+            {
+                <tr>
+            <td>@i.Semester</td>
+            <td>@i.Subject</td>
+            <td>@i.Points_for_semester</td>
+            <td>@i.Type_of_test</td>
+            <td>@i.Date_of_test</td>
+            <td>@i.Points_for_test</td>
+            <td>@i.Sum_of_points</td>
+                </tr>
+             }
+        </tbody>
+</table>

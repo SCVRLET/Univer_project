@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupport">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse header" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto dropdown username">
+            <li class="nav-item active">
+                <a asp-action="index" asp-controller="home" class="nav-link">Главная</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Преподаватели</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Форум</a>
+            </li>
+            <li class="nav-item active">
+                <a asp-action="Timetable" asp-controller="home" class="nav-link">Расписание</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Учебный календарь</a>
+            </li>
+        </ul>
+        <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal">Авторизация</button>
+    </div>
+</nav>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Авторизация</h5>
+                <button clase="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form asp-controller="Home" asp-action="Login" method="post">
+                        <div class="form-froup">
+                            <label type="text">Логин</label>
+                            <input type="text" class="form-control" id="email" aria="emailHelp" placeholder="Введите логин" name="login" required>
+                            <label for="password">Пароль</label>
+                            <input type="text" class="form-control" id="Password" aria="passwordHelp" placeholder="Введите пароль" name="password" required>
+                            <div class="form-check">
+                                <label class="fom-check-label">
+                                    <input type="checkbox" class="form-check-input" name="rememberMe" value="true">
+                                    Запомнить меня
+                                </label>
+                            </div>
+                        </div>
+                        <button href="main2.html" type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

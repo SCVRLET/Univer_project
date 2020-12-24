@@ -1,0 +1,44 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupport">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse header" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto dropdown username">
+            <li class="nav-item active">
+                <a asp-action="Index" asp-controller="user" class="nav-link">Главная</a>
+            </li>
+            <li class="nav-item active">
+                <a asp-action="Progress" asp-controller="user" class="nav-link">Успеваемость</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Рейтинг</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Преподаватели</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Форум</a>
+            </li>
+            <li class="nav-item active">
+                <a asp-action="Timetable" asp-controller="user" class="nav-link">Расписание</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Учебный календарь</a>
+            </li>
+        </ul>
+        <div class="poster nav-item active">
+            <a class="nav-link">Настройки профиля</a>
+            <div class="descr">
+                <li>
+                    <a asp-action="Profile" asp-controller="user">Профиль</a>
+                </li>
+                    <li>
+                        <form method="post" asp-controller="User" asp-action="Logout">
+                            <button class="nav-link">Выход</button>
+                        </form>
+                    </li>
+            </div>
+        </div>
+    </div>
+</nav>

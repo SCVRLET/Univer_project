@@ -1,0 +1,127 @@
+@model TimetableService
+@{
+    Layout = "~/Views/Shared/_LayoutForLogged.cshtml";
+}
+<style>
+    body {
+        background: #ffffff;
+    }
+    tr {
+        border-spacing: 20px 20px;
+        height: 50px;
+    }
+    th{
+        margin-left: 100px;
+        width: 70px;
+    }
+</style>
+
+
+<form action="/Home/GroupsSearch" data-ajax="true" data-ajax-mode="replace" data-ajax-update="groups" id="form0" method="post">
+    <h4>Институт</h4>
+    <select id="institute" name="institute_name">
+        <option value="">Выберите институт</option>
+        @foreach (var i in Model.GetInstitutes())
+        {
+            <option>@i.Name</option>
+        }
+    </select>
+    <h4>Группа</h4>
+    <select id="groups" name="group_name">
+        <option value="">
+            Выбери группу
+        </option>
+    </select>
+</form>
+<table id="timetable" style="border-spacing: 7px">
+
+</table>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#groups").change(loadGroups).change();
+        });
+
+        $(function loadGroups() {
+            $("#institute").on("change", function () {
+                console.log('Я работаю!' + $(this).val());
+                var name_of_institute = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GroupsSearch")',
+                    type: "POST",
+                    data: { institute_name: name_of_institute },
+                    dataType: "json",
+                    success: function (response) {
+                        $("#groups").empty();
+                        $("#groups").append("<option value=''>Выберите группу</option>");
+                        response.forEach(function (gr_name) {
+                            var option = $('<option />');
+                            option.val(gr_name.name);
+                            option.text(gr_name.name);
+                            $('#groups').append(option);
+                        })
+
+                    },
+                    failure: function (response) {
+                        console.log('fail');
+                        alert(response);
+                    }
+                })
+            });
+        });
+    </script>
+    <script>
+    $(function () {
+        $("#groups").on("change", function () {
+            $("#timetable").empty();
+                console.log('Я работаю!' + $(this).val());
+                var name_of_group = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("TimetableSearch")',
+                    type: "POST",
+                    data: { group_name: name_of_group },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.length > 0) {
+                            $("#timetable").append("<thead>" +
+                                "<tr>" +
+                                '<th style="margin: 200px;"> Время </th>' +
+                                "<th> Предмет </th>" +
+                                "<th> Преподаватель </th>" +
+                                "<th> Аудитория </th>" +
+                                "<th> Здание </th>" +
+                                "</tr>" +
+                                "</thead>");
+                        }
+                        $("#timetable").append("<tbody>");
+                        var day_of_week = response[0].day_of_week;
+                        console.log(response[0].day_of_week)
+                        $("#timetable").append('<tr> <td>' + day_of_week + " </td></tr>")
+                        response.forEach(function (timetable) {
+                            if (timetable.day_of_week != day_of_week) {
+                                console.log(day_of_week)
+                                $("#timetable").append('<tr> <td>' + timetable.day_of_week + " </td></tr>")
+                                day_of_week = timetable.day_of_week
+                            }
+                            $("#timetable").append("<tr>" + 
+                                "<td>" + timetable.timetable_cell.time_interval + "</td>"
+                                + "<td>" + timetable.timetable_cell.subject + "</td>" + 
+                                "<td>" + timetable.timetable_cell.teacher + "</td>" +
+                                "<td>" + timetable.timetable_cell.audience + "</td>" +
+                                "<td>" + timetable.timetable_cell.building + "</td>" + "</tr>"
+                            );
+                        })
+                        $("#timetable").append("</tbody>");
+                    },
+                    failure: function (response) {
+                        console.log('fail');
+                        alert(response);
+                    }
+                })
+            });
+        });
+    </script>
+}
