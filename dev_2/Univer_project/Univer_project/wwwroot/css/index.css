@@ -1,0 +1,23 @@
+body {
+    background: url(https://prikolist.club/wp-content/uploads/2019/12/0-14.jpg) no-repeat;
+    background-size: 100%;
+    /*color: red;*/
+}
+.poster{
+    position:relative;
+}
+.descr{
+    display:none;
+	border: 1px solid #012a77;
+    background: white;
+}
+.poster:hover .descr{
+    display:block;
+    position:absolute;
+}
+.p-0{
+     padding: 0;
+}
+.content {
+  display: none;
+}

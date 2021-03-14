@@ -1,0 +1,24 @@
+
+.poster{
+    position:relative;
+}
+.descr{
+    display:none;
+	border: 1px solid #012a77;
+    background: white;
+}
+.poster:hover .descr{
+    display:block;
+    position:absolute;
+}
+.pedit_label{
+    padding: 6px 10px 0 0;
+    float: left;
+    text-align: right;
+}
+.pedit_row {
+    padding-bottom: 15px;
+}
+.clear_fix {
+    display: block;
+}
